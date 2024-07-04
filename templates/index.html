@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+ <head>
+  <title>ShashKi</title>
+  <meta charset="UTF-8">
+  <link href="static/img/favicon.ico", rel="icon">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+   .box { text-align: center}
+   .centered { display: inline-block;  margin: 0; }
+   .chess-board { border-spacing: 0; border-collapse: collapse; }
+   .chess-board th { padding: .2em; }
+   .chess-board td { border: 0px solid; width: 5em; height: 5em; text-align: center; vertical-align: middle; }
+   .chess-board .white { background: #f0d9b5; }
+   .chess-board .black { background: #b58863; }
+
+   .w.white {background: url('static/img/w.png') no-repeat center center, #f0d9b5; background-size: contain}
+   .w.black { background: url('static/img/w.png') no-repeat center center, #b58863; background-size: contain}
+   .wd.white {background: url('static/img/wd.png') no-repeat center center, #f0d9b5; background-size: contain}
+   .wd.black { background: url('static/img/wd.png') no-repeat center center, #b58863; background-size: contain}
+   .b.white {background: url('static/img/b.png') no-repeat center center, #f0d9b5; background-size: contain}
+   .b.black { background: url('static/img/b.png') no-repeat center center, #b58863; background-size: contain}
+   .bd.white {background: url('static/img/bd.png') no-repeat center center, #f0d9b5; background-size: contain}
+   .bd.black { background: url('static/img/bd.png') no-repeat center center, #b58863; background-size: contain}
+
+   .mblur.white  { background: #CDD26A }
+   .mblur.black { background: #AAA23A}
+   .mblur.w.white {background: url('static/img/w.png') no-repeat center center, #CDD26A; background-size: contain}
+   .mblur.w.black { background: url('static/img/w.png') no-repeat center center, #AAA23A; background-size: contain}
+   .mblur.b.white {background: url('static/img/b.png') no-repeat center center, #CDD26A; background-size: contain}
+   .mblur.b.black { background: url('static/img/b.png') no-repeat center center, #AAA23A; background-size: contain}
+   .mblur.wd.white {background: url('static/img/wd.png') no-repeat center center, #CDD26A; background-size: contain}
+   .mblur.wd.black { background: url('static/img/wd.png') no-repeat center center, #AAA23A; background-size: contain}
+   .mblur.bd.white {background: url('static/img/bd.png') no-repeat center center, #CDD26A; background-size: contain}
+   .mblur.bd.black { background: url('static/img/bd.png') no-repeat center center, #AAA23A; background-size: contain}
+
+   .blur.white {background: #AEB287}
+   .blur.black {background: #84794E}
+   .blur.w.white {background: url('static/img/w.png') no-repeat center center, #AEB287; background-size: contain}
+   .blur.w.black { background: url('static/img/w.png') no-repeat center center, #84794E; background-size: contain}
+   .blur.b.white {background: url('static/img/b.png') no-repeat center center, #AEB287; background-size: contain}
+   .blur.b.black { background: url('static/img/b.png') no-repeat center center, #84794E; background-size: contain}
+   .blur.wd.white {background: url('static/img/wd.png') no-repeat center center, #AEB287; background-size: contain}
+   .blur.wd.black { background: url('static/img/wd.png') no-repeat center center, #84794E; background-size: contain}
+   .blur.bd.white {background: url('static/img/bd.png') no-repeat center center, #AEB287; background-size: contain}
+   .blur.bd.black { background: url('static/img/bd.png') no-repeat center center, #84794E; background-size: contain}
+  
+   .pblur.white {background: url('static/img/pblur.png'), #f0d9b5; background-size: contain}
+   .pblur.black {background: url('static/img/pblur.png'), #b58863; background-size: contain}
+   .pblur.w.white {background: url('static/img/pblur.png'), url('static/img/w.png'), #f0d9b5; background-size: contain}
+   .pblur.w.black { background: url('static/img/pblur.png'), url('static/img/w.png'), #b58863; background-size: contain}
+   .pblur.b.white {background: url('static/img/pblur.png'), url('static/img/b.png'), #f0d9b5; background-size: contain}
+   .pblur.b.black { background: url('static/img/pblur.png'), url('static/img/b.png'), #b58863; background-size: contain}
+   .pblur.wd.white {background: url('static/img/pblur.png'), url('static/img/wd.png'), #f0d9b5; background-size: contain}
+   .pblur.wd.black { background: url('static/img/pblur.png'), url('static/img/wd.png'), #b58863; background-size: contain}
+   .pblur.bd.white {background: url('static/img/pblur.png'), url('static/img/bd.png'), #f0d9b5; background-size: contain}
+   .pblur.bd.black { background: url('static/img/pblur.png'), url('static/img/bd.png'), #b58863; background-size: contain}
+
+   .pr.white {background: #A9BDCA}
+   .pr.black {background: #7F8490}
+   .pr.w.white {background: url('static/img/w.png') no-repeat center center, #A9BDCA; background-size: contain}
+   .pr.w.black { background: url('static/img/w.png') no-repeat center center, #7F8490; background-size: contain}
+   .pr.b.white {background: url('static/img/b.png') no-repeat center center, #A9BDCA; background-size: contain}
+   .pr.b.black { background: url('static/img/b.png') no-repeat center center, #7F8490; background-size: contain}
+   .pr.wd.white {background: url('static/img/wd.png') no-repeat center center, #A9BDCA; background-size: contain}
+   .pr.wd.black { background: url('static/img/wd.png') no-repeat center center, #7F8490; background-size: contain}
+   .pr.bd.white {background: url('static/img/bd.png') no-repeat center center, #A9BDCA; background-size: contain}
+   .pr.bd.black { background: url('static/img/bd.png') no-repeat center center, #7F8490; background-size: contain}
+
+  </style>
+ </head>
+ <div class="box">
+  <div class="centered">
+  <table class="chess-board">
+    <tr>
+        <th></th>
+        <th>0</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>7</th>
+    </tr>
+    <tr>
+        <th>0</th>
+        <td class="white" id="00"></td>
+        <td class="black" id="10"></td>
+        <td class="white" id="20"></td>
+        <td class="black" id="30"></td>
+        <td class="white" id="40"></td>
+        <td class="black" id="50"></td>
+        <td class="white" id="60"></td>
+        <td class="black" id="70"></td>
+        <th>0</th>
+    </tr>
+    <tr>
+        <th>1</th>
+        <td class="black" id="01"></td>
+        <td class="white" id="11"></td>
+        <td class="black" id="21"></td>
+        <td class="white" id="31"></td>
+        <td class="black" id="41"></td>
+        <td class="white" id="51"></td>
+        <td class="black" id="61"></td>
+        <td class="white" id="71"></td>
+        <th>1</th>
+    </tr>
+    <tr>
+        <th>2</th>
+        <td class="white" id="02"></td>
+        <td class="black" id="12"></td>
+        <td class="white" id="22"></td>
+        <td class="black" id="32"></td>
+        <td class="white" id="42"></td>
+        <td class="black" id="52"></td>
+        <td class="white" id="62"></td>
+        <td class="black" id="72"></td>
+        <th>2</th>
+    </tr>
+    <tr>
+        <th>3</th>
+        <td class="black" id="03"></td>
+        <td class="white" id="13"></td>
+        <td class="black" id="23"></td>
+        <td class="white" id="33"></td>
+        <td class="black" id="43"></td>
+        <td class="white" id="53"></td>
+        <td class="black" id="63"></td>
+        <td class="white" id="73"></td>
+        <th>3</th>
+    </tr>
+    <tr>
+        <th>4</th>
+        <td class="white" id="04"></td>
+        <td class="black" id="14"></td>
+        <td class="white" id="24"></td>
+        <td class="black" id="34"></td>
+        <td class="white" id="44"></td>
+        <td class="black" id="54"></td>
+        <td class="white" id="64"></td>
+        <td class="black" id="74"></td>
+        <th>4</th>
+    </tr>
+    <tr>
+        <th>5</th>
+        <td class="black" id="05"></td>
+        <td class="white" id="15"></td>
+        <td class="black" id="25"></td>
+        <td class="white" id="35"></td>
+        <td class="black" id="45"></td>
+        <td class="white" id="55"></td>
+        <td class="black" id="65"></td>
+        <td class="white" id="75"></td>
+        <th>5</th>
+    </tr>
+    <tr>
+        <th>6</th>
+        <td class="white" id="06"></td>
+        <td class="black" id="16"></td>
+        <td class="white" id="26"></td>
+        <td class="black" id="36"></td>
+        <td class="white" id="46"></td>
+        <td class="black" id="56"></td>
+        <td class="white" id="66"></td>
+        <td class="black" id="76"></td>
+        <th>6</th>
+    </tr>
+    <tr>
+        <th>7</th>
+        <td class="black" id="07"></td>
+        <td class="white" id="17"></td>
+        <td class="black" id="27"></td>
+        <td class="white" id="37"></td>
+        <td class="black" id="47"></td>
+        <td class="white" id="57"></td>
+        <td class="black" id="67"></td>
+        <td class="white" id="77"></td>
+        <th>7</th>
+    </tr>
+    <tr>
+        <th></th>
+        <th>0</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>7</th>
+    </tr>
+  </table>
+  </div>
+ </div>
+ <script src="{{url_for('static', filename='js/socket.io.js')}}"></script>
+<script>var start_pos = {{start_pos}}</script>
+<script type="text/javascript" src="{{url_for('static', filename='js/shashi.js')}}"></script>
+</html>

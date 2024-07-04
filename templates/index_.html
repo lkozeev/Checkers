@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Перенаправление на сайты</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+      background-color: #f0f0f0; /* Цвет фона */
+    }
+
+    a {
+      margin: 5%; /* Добавим немного отступа между кнопками */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+      width: 10%; /* Ширина обертки кнопки */
+    }
+
+    img {
+      width: 100%; /* Занимает 100% ширины обертки */
+      height: auto; /* Подстраивается под ширину */
+    }
+
+    span {
+      margin-top: 10%; /* Отступ между изображением и текстом */
+    }
+
+    /* Создаем шахматный фон */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(45deg, #eee, #eee 20px, #ddd 20px, #ddd 40px);
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/1">
+    <img src="static/img/b.png" alt="Кнопка 1">
+  </a>
+
+  <a href="/2">
+    <img src="static/img/robot.png" alt="Кнопка 2">
+  </a>
+
+</body>
+</html>
